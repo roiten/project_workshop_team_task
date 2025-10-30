@@ -79,10 +79,16 @@ public:
 
     void update(float dt, const sf::Vector2f &targetPos) {
         const float MAX_SPEED_PX = 100.f;
-        const float FRAME_DISTANCE = 50.f;
-
+        const float FRAME_DISTANCE = 30.f;
 
         Vector2f currPos = m_animatedSprite.getPosition();
+        if (currPos.x > targetPos.x) {
+            m_animatedSprite.setScale({1.0f, 1.0f});
+        }
+        else if (currPos.x < targetPos.x) {
+            m_animatedSprite.setScale({-1.0f, 1.0f});
+        }
+
         Vector2f distanceXY = targetPos - currPos;
 
         float distance = std::sqrt(distanceXY.x * distanceXY.x + distanceXY.y * distanceXY.y);
